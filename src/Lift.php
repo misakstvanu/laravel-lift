@@ -90,6 +90,17 @@ trait Lift
             $model->dispatchEvents = [];
         });
 
+        static::created(function (Model $model) {
+            self::fillProperties($model);
+
+            foreach ($model->dispatchEvents as $prop) {
+                $event = self::watchedProperties()[$prop];
+                event(new $event($model));
+            }
+
+            $model->dispatchEvents = [];
+        });
+
         static::retrieved(fn (Model $model) => self::fillProperties($model));
     }
 
