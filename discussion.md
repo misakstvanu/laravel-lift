@@ -15,5 +15,8 @@ There is a lot of incompatibilities coming from tyhe nature of Lift.
 1. If your observer runs after Lift, any changes made to properties will not be preserved in database.
 2. If your observer runs before Lift, model's properties might not be initialized (retrieving, retrieved) or properties might not be up to date (creating, saving after `-> update()`)
 
- 
+
+## Lift initialization listeners
+1. When replicating (`->replicate()`) a model, Lift does not run and object's properties are not initialized.
+2. Same goes for observers listening to `created` event.
 
